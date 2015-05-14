@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+ 
+   >
+<h:head>
+   <title>JSF Tutorial!</title>
+   <h:outputStylesheet library="css" name="styles.css"  /> 
+</h:head>
+<h:body>
+   <h1>helloWorld</h1>
+   <h:form>
+   <h:dataTable value="#{ModelList.mls}" var="mdl"
+     styleClass="employeeTable"
+   headerClass="employeeTableHeader"
+   rowClasses="employeeTableOddRow,employeeTableEvenRow">
+	<h:column>    				
+      <f:facet name="header">Id</f:facet>    				
+      #{ModelList.mls.indexOf(mdl) + 1}
+   </h:column>
+   <h:column>    				
+      <f:facet name="header">Name</f:facet>    				
+      #{mdl.name}
+   </h:column>
+   <h:column>
+      <f:facet name="header">ModerTime</f:facet>
+ 
+      #{mdl.modertime}
+   </h:column>
+   <h:column>
+      <f:facet name="header">Status</f:facet>
+      
+      #{mdl.status}
+   </h:column>
+   <h:column>
+      <f:facet name="header">Publics</f:facet>
+     <h:selectBooleanCheckbox value="#{mdl.publics}" />
+   </h:column>
+</h:dataTable>
+<h:commandButton value="add" type="submit" onclick="alert('add');" action="#{ModelList.addMdl()}"/>
+
+<h:commandButton value="del" type="submit" action="#{ModelList.rmvMdl()}"/>
+</h:form>
+</h:body>
+</html>
