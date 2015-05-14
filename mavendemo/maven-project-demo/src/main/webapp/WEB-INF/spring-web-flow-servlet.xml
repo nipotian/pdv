@@ -21,7 +21,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-	<context:component-scan base-package="demo" />
+	<context:component-scan base-package="demo.controller" />
 	<mvc:annotation-driven />
 	<beans:bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -61,10 +61,11 @@ http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 		<form-login login-processing-url="/account/login"
 			login-page="/account/login" authentication-failure-url="/login?error=1" />
 	</http>
+
 	<beans:bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<beans:property name="url" value="jdbc:mysql://localhost:3306/demo" />
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/web_flow" />
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="" />
 	</beans:bean>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+ 
+   >
+<h:head>
+   <title>JSF Tutorial!</title>
+   <h:outputStylesheet library="css" name="styles.css"  /> 
+  
+</h:head>
+<h:body>
+   <h1>helloWorld</h1>
+   <h:form>
+   <h:dataTable value="#{ModelList.mls}" var="mdl" 
+     styleClass="mTable"
+   headerClass="mTableHeader"
+   rowClasses="mTableOddRow,mTableEvenRow"
+   >
+	<h:column>    				
+      <f:facet name="header">Id</f:facet>    				
+      #{ModelList.mls.indexOf(mdl) + 1}
+   </h:column>
+   <h:column>    				
+      <f:facet name="header">Name</f:facet> 
+      <h:inputText value="#{mdl.name}" name="iname"
+               size="5" rendered="#{mdl.canedit}" />   				
+      <h:outputText value="#{mdl.name}" name="aname"
+               size="5" rendered="#{!mdl.canedit}" />
+      
+   </h:column>
+   <h:column>
+      <f:facet name="header">ModerTime</f:facet>
+ 		
+      #{mdl.modertime}
+   </h:column>
+   <h:column>
+      <f:facet name="header">Status</f:facet>
+        <h:inputText value="#{mdl.status}" name="iname"
+               size="5" rendered="#{mdl.canedit}" />
+      <h:outputText value="#{mdl.status}" name="asts"
+               size="5" rendered="#{!mdl.canedit}" />
+
+      
+   </h:column>
+   <h:column>
+      <f:facet name="header">Publics</f:facet>
+     <h:selectBooleanCheckbox value="#{mdl.publics}" />
+   </h:column>
+   <h:column>
+   <f:facet name="header">Edit</f:facet>
+    <h:commandButton value="#{mdl.editting()}" type="submit" 
+   action="#{ModelList.edMdl(mdl)}" rendered="#{!mdl.canedit}">
+   <f:setPropertyActionListener 
+                     target="#{anme}" value="#{iname}" />
+   <f:setPropertyActionListener 
+                     target="#{asts}" value="#{ists}" />
+   
+
+   </h:commandButton>
+<h:commandButton value="#{mdl.editting()}" type="submit" 
+   action="#{ModelList.edMdl(mdl)}" rendered="#{mdl.canedit}"/>
+  
+   </h:column>
+   <h:column>
+   <f:facet name="header">Delete</f:facet>
+   <h:commandButton value="del" type="submit" onclick="alert('delete?');" action="#{ModelList.rmvMdl(mdl)}"/>
+   </h:column>
+</h:dataTable>
+<h:commandButton value="add" type="submit" onclick="alert('add');" action="#{ModelList.addMdl()}"/>
+<table>
+      <tr>
+            <td>Name :</td>
+            <td><h:inputText size="10" value="#{ModelList.name}" /></td>
+      </tr>
+     <tr>
+            <td>ModerTime :</td>
+            <td><h:inputText size="3" value="#{ModelList.mday}" />/
+            <h:inputText size="3" value="#{ModelList.mmonth}" />/
+            <h:inputText size="3" value="#{ModelList.myear}" /></td>
+      </tr>
+      <tr>
+            <td>Status :</td>
+            <td><h:inputText size="5" value="#{ModelList.status}" /></td>
+      </tr>
+      
+    
+      </table>	  
+
+</h:form>
+</h:body>
+</html>
