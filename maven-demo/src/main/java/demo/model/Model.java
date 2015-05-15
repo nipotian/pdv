@@ -2,40 +2,35 @@ package demo.model;
 
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  * @author piandv
  *
  */
-@Entity
-@Table(name="Model")
-public class Model {
+
+@ManagedBean(name = "Model", eager = true)
+@SessionScoped
+public class Model implements Comparable<Model>{
 	
-	@Id
-	@GeneratedValue
+	
 	private int id;
 	
-	@Size(min = 3, max = 30, message = "Username must be between 3 and 30 characters long.")
-	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must be alphanumeric with no spaces")
+	
 	private String name;
 	
 	private Date modertime;
 	
-	@NotNull
-	@Pattern(regexp = "Using||Stopped||Pause", message = "Status must be 'Using', 'Stopped', or 'Pause' ")
 	private String status;
 	
 	private boolean publics;
 	private boolean canedit;
+	private boolean tk;
 	public Model(){
 		canedit=false;
+		tk=true;
 	}
 
 	public Model(String name){
@@ -104,6 +99,23 @@ public class Model {
 	public String editting(){
 		if(isCanedit()) return "save";
 		return "edit";
+	}
+
+	
+
+	public boolean isTk() {
+		return tk;
+	}
+
+	public void setTk(boolean tk) {
+		this.tk = tk;
+	}
+
+	@Override
+	public int compareTo(Model o) {
+		// TODO Auto-generated method stub
+		return this.name.compareTo(o.getName());
+	
 	}
 
 	

@@ -21,55 +21,49 @@
    >
 	<h:column>    				
       <f:facet name="header">Id</f:facet>    				
-      #{ModelList.mls.indexOf(mdl) + 1}
+      <h:outputText value="#{ModelList.mls.indexOf(mdl) + 1}" rendered="#{mdl.tk}" />
    </h:column>
    <h:column>    				
       <f:facet name="header">Name</f:facet> 
-      <h:inputText value="#{mdl.name}" name="iname"
-               size="5" rendered="#{mdl.canedit}" />   				
-      <h:outputText value="#{mdl.name}" name="aname"
-               size="5" rendered="#{!mdl.canedit}" />
+      <h:inputText value="#{mdl.name}" 
+               size="5" rendered="#{mdl.canedit and mdl.tk}" />   				
+      <h:outputText value="#{mdl.name}" 
+               size="5" rendered="#{!mdl.canedit and mdl.tk}" />
       
    </h:column>
    <h:column>
       <f:facet name="header">ModerTime</f:facet>
  		
-      #{mdl.modertime}
+      <h:outputText value="#{mdl.modertime}" rendered="#{mdl.tk}" />
    </h:column>
    <h:column>
       <f:facet name="header">Status</f:facet>
-        <h:inputText value="#{mdl.status}" name="iname"
-               size="5" rendered="#{mdl.canedit}" />
-      <h:outputText value="#{mdl.status}" name="asts"
-               size="5" rendered="#{!mdl.canedit}" />
+        <h:inputText value="#{mdl.status}" 
+               size="5" rendered="#{mdl.canedit and mdl.tk}" />
+      <h:outputText value="#{mdl.status}" 
+               size="5" rendered="#{!mdl.canedit and mdl.tk}" />
 
       
    </h:column>
    <h:column>
       <f:facet name="header">Publics</f:facet>
-     <h:selectBooleanCheckbox value="#{mdl.publics}" />
+     <h:selectBooleanCheckbox value="#{mdl.publics}" rendered="#{mdl.tk}" />
    </h:column>
    <h:column>
    <f:facet name="header">Edit</f:facet>
-    <h:commandButton value="#{mdl.editting()}" type="submit" 
-   action="#{ModelList.edMdl(mdl)}" rendered="#{!mdl.canedit}">
-   <f:setPropertyActionListener 
-                     target="#{anme}" value="#{iname}" />
-   <f:setPropertyActionListener 
-                     target="#{asts}" value="#{ists}" />
-   
-
-   </h:commandButton>
-<h:commandButton value="#{mdl.editting()}" type="submit" 
-   action="#{ModelList.edMdl(mdl)}" rendered="#{mdl.canedit}"/>
-  
+    <h:commandButton value="#{mdl.editting()}" 
+   action="#{ModelList.edMdl(mdl)}" rendered="#{mdl.tk}" />
    </h:column>
    <h:column>
    <f:facet name="header">Delete</f:facet>
-   <h:commandButton value="del" type="submit" onclick="alert('delete?');" action="#{ModelList.rmvMdl(mdl)}"/>
+   <h:commandButton value="del" type="submit" onclick="alert('delete?');" 
+   rendered="#{mdl.tk}" action="#{ModelList.rmvMdl(mdl)}"/>
    </h:column>
 </h:dataTable>
 <h:commandButton value="add" type="submit" onclick="alert('add');" action="#{ModelList.addMdl()}"/>
+<h:commandButton value="sort" type="submit"  action="#{ModelList.sort()}"/>
+<h:commandButton value="search" type="submit"  action="#{ModelList.search()}"/>
+<h:commandButton value="all" type="submit"  action="#{ModelList.all()}"/>
 <table>
       <tr>
             <td>Name :</td>

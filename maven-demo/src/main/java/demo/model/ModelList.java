@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -27,6 +28,7 @@ public class ModelList implements Serializable {
 			new Model("Mark",new Date(),"us",false),
 			new Model("Chris",new Date(),"pse",true),
 			new Model("Peter",new Date(),"us",false)));
+	
 	
 	private String name;	
 	private String mday;
@@ -110,17 +112,31 @@ public String addMdl(){
 		
 	}
 	mls.add(new Model(name,mdate, status, true));
-	System.out.println(mls);
-	return "add-done";
+	all();
+	return null;
 }
 public String rmvMdl(Model m){
 	mls.remove(m);
 	System.out.println(mls);
-	return "rmv-done";
+	return null;
 }
 public String edMdl(Model m){
 	m.setCanedit(!m.isCanedit());
-	return "";
+	return null;
 }
-
+public void sort(){
+	Collections.sort(mls);
+}
+public void search(){
+	for(Model m :mls){
+		if(!m.getName().contains(name)) m.setTk(false);
+		else m.setTk(true);
+	}
+}
+public void all(){
+	for(Model m :mls){
+		
+		m.setTk(true);
+	}
+}
 }
