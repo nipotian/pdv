@@ -14,7 +14,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mls</servlet-name>
-		<url-pattern></url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
       <welcome-file>faces/home.xhtml</welcome-file>
