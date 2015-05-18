@@ -8,8 +8,8 @@
    >
 <h:head>
    <title>JSF Tutorial!</title>
-   <h:outputStylesheet library="css" name="styles.css"  /> 
-  
+  <h:outputStylesheet library="css" name="styles.css"  /> 
+ 
 </h:head>
 <h:body>
    <h1>helloWorld</h1>
@@ -38,9 +38,13 @@
    </h:column>
    <h:column>
       <f:facet name="header">Status</f:facet>
-        <h:inputText value="#{mdl.status}" 
-               size="5" rendered="#{mdl.canedit and mdl.tk}" />
-      <h:outputText value="#{mdl.status}" 
+        
+               <h:selectOneMenu value="#{mdl.status}" rendered="#{mdl.canedit and mdl.tk}" >
+   	<f:selectItem itemValue="using" itemLabel="using" />
+   	<f:selectItem itemValue="pause" itemLabel="pause" />
+   	<f:selectItem itemValue="stopped" itemLabel="stopped" />
+</h:selectOneMenu>
+      <h:outputText value="#{mdl.status}" class="mS#{mdl.status}"
                size="5" rendered="#{!mdl.canedit and mdl.tk}" />
 
       
@@ -77,7 +81,13 @@
       </tr>
       <tr>
             <td>Status :</td>
-            <td><h:inputText size="5" value="#{ModelList.status}" /></td>
+            <td>
+            <h:selectOneMenu value="#{ModelList.status}">
+   	<f:selectItem itemValue="using" itemLabel="using" />
+   	<f:selectItem itemValue="pause" itemLabel="pause" />
+   	<f:selectItem itemValue="stopped" itemLabel="stopped" />
+</h:selectOneMenu>
+            </td>
       </tr>
       
     

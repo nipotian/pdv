@@ -235,5 +235,6 @@
   </dependencies>
   <build>
     <finalName>maven-demo</finalName>
+    
   </build>
 </project>

@@ -23,11 +23,11 @@ public class ModelList implements Serializable {
 	 */
 	
 	private static List<Model> mls=new ArrayList<Model>(Arrays.asList(
-			new Model("John",new Date(),"us",true),
-			new Model("Robert",new Date(),"stp",true),
-			new Model("Mark",new Date(),"us",false),
-			new Model("Chris",new Date(),"pse",true),
-			new Model("Peter",new Date(),"us",false)));
+			new Model("John",new Date(),"using",true),
+			new Model("Robert",new Date(),"pause",true),
+			new Model("Mark",new Date(),"using",false),
+			new Model("Chris",new Date(),"stopped",true),
+			new Model("Peter",new Date(),"using",false)));
 	
 	
 	private String name;	
