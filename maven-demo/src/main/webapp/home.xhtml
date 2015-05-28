@@ -20,8 +20,9 @@
    rowClasses="mTableOddRow,mTableEvenRow"
    >
 	<h:column>    				
-      <f:facet name="header">Id</f:facet>    				
-      <h:outputText value="#{ModelList.mls.indexOf(mdl) + 1}" rendered="#{mdl.tk}" />
+      <f:facet name="header">Id</f:facet>   
+      <h:outputText value="#{mdl.id}" rendered="#{mdl.tk}" /> 				
+      <!--  <h:outputText value="#{ModelList.mls.indexOf(mdl) + 1}" rendered="#{mdl.tk}" />-->
    </h:column>
    <h:column>    				
       <f:facet name="header">Name</f:facet> 

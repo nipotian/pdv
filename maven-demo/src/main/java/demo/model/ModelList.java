@@ -2,14 +2,23 @@ package demo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.Collections;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+//import javax.persistence.PersistenceContext;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
 
 @ManagedBean(name = "ModelList", eager = true)
 @SessionScoped
@@ -19,15 +28,17 @@ public class ModelList implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 
+	 * @SuppressWarnings("finally")
 	 */
-	
-	private static List<Model> mls=new ArrayList<Model>(Arrays.asList(
+	private static ApplicationContext context=new ClassPathXmlApplicationContext("mls-dataSource.xml");
+	private static DriverManagerDataSource ds= (DriverManagerDataSource) context.getBean("dataSource");
+	private static List<Model> mls=selecttbl("Model");
+	/*private static List<Model> mls=new ArrayList<Model>(Arrays.asList(
 			new Model("John",new Date(),"using",true),
 			new Model("Robert",new Date(),"pause",true),
 			new Model("Mark",new Date(),"using",false),
 			new Model("Chris",new Date(),"stopped",true),
-			new Model("Peter",new Date(),"using",false)));
+			new Model("Peter",new Date(),"using",false)));*/
 	
 	
 	private String name;	
@@ -37,9 +48,33 @@ public class ModelList implements Serializable {
 	private String status;	
 	private boolean publics;
 	public ModelList(){
-			
+		//mls= selecttbl("Model");	
 	}
+
+public static List<Model> selecttbl(String tbl){
+	List<Model> mls=new ArrayList<Model>();
+	Model mdl;
+	try{
+		
+	Connection con=ds.getConnection();
 	
+	Statement stm=con.createStatement();
+	ResultSet rs=stm.executeQuery("Select * from " + tbl);
+	while (rs.next()){
+		mdl=new Model();
+		mdl.setId(rs.getInt(1));
+		mdl.setName(rs.getString(2));
+		mdl.setModertime(rs.getDate(3));
+		mdl.setStatus(rs.getString(4));
+		mdl.setPublics(rs.getBoolean(5));
+		mls.add(mdl);
+	}
+	}catch (Exception ex){
+		System.out.println("loi: " + ex.getMessage());
+	}
+	return mls;
+	
+}
 public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
